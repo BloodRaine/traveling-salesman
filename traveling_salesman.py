@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # Robinson Merillat
 # CSCI 406
 # Project 1 - Traveling Salesman
@@ -18,6 +19,13 @@ class Point:
         return str(self)
 
 def cost(arr):
+    n = len(arr)
+    total_dist = 0
+    for i in range(1, n - 1):
+        total_dist += arr[i - 1].distance(arr[i])
+    return total_dist + arr[-1].distance(arr[0])
+
+def cost_old(arr):
     ar = list(arr)
     p0 = ar[0]
     ar.remove(p0)
@@ -81,12 +89,12 @@ elif method == 'BF':
     text += "brute force"
     l.remove(p0)
     for p in itertools.permutations(l):
-        a = [p0] + list(p)
+        a = (p0,) + p
         temp = cost(a)
         if temp < total:
             total = temp
             path = a
-    path.append(path[0])
+    path = path + (path[0],)
 
 print "The path generated from the %s algorithm is as follows" %text
 print(path)
