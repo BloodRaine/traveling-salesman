@@ -24,11 +24,12 @@ def cost(arr):
     s = 0
     p_end = p0
     n = p0
+    infin = float("inf")
     while ar:
-        m = n.distance(ar[0])
         for p in ar:
+            m = infin
             temp = n.distance(p)
-            if temp <= m:
+            if temp < m:
                 m = temp
                 p_end = p
         s += m
@@ -55,7 +56,6 @@ total = 0
 text = ""
 method = raw_input("Would you like to perform the nearest neighbor or brute force algoritm? (enter NN or BF): ")
 start_time = time.time() 
-m = float("inf")
 if method == 'NN':
     l.remove(p0)
     path.append(p0)
@@ -75,12 +75,14 @@ if method == 'NN':
     total += p0.distance(path[len(path)-1])
     path.append(p0)
 elif method == 'BF':
+    total = cost(l)
     text += "brute force"
     l.remove(p0)
     for p in itertools.permutations(l):
         a = [p0] + list(p)
+
         temp = cost(a)
-        if temp <= m:
+        if temp < total:
             total = temp
             path = a
     path.append(path[0])
