@@ -48,7 +48,7 @@ def cost_old(arr):
 
 # main
 
-text_file = open("test.txt", "r")
+text_file = open("point.txt", "r")
 print "Opening test file"
 first_line = int(text_file.readline().strip())
 
