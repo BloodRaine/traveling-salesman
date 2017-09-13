@@ -20,9 +20,9 @@ class Point:
 
 def cost(arr):
     n = len(arr)
-    total_dist = 0
-    for i in range(1, n - 1):
-        total_dist += arr[i - 1].distance(arr[i])
+    total_dist = 0 
+    for i in range(0, n - 1):
+        total_dist += arr[i].distance(arr[i + 1])
     return total_dist + arr[-1].distance(arr[0])
 
 def cost_old(arr):
@@ -85,7 +85,7 @@ if method == 'NN':
     total += p0.distance(path[len(path)-1])
     path.append(p0)
 elif method == 'BF':
-    total = cost(l)
+    total = 100000000000
     text += "brute force"
     l.remove(p0)
     for p in itertools.permutations(l):
